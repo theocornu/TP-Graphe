@@ -1,7 +1,7 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-const int NBMAX_SOMMETS = 20; // nb max de sommmets du graphe
+const int NBMAX_SOMMETS = 210; // nb max de sommmets du graphe
 const int NBMAX_SUCC = 4; // nb max de successeurs par sommet
 const int INF = 9999;
 

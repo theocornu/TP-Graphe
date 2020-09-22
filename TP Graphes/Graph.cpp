@@ -67,7 +67,7 @@ void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution)
 	for (int i = 1; i <= nb_sommets; i++) {
 		int min = INF, imin = -1;
 		// Recherche sommet avec marque min et non traité
-		for (int j = 1; j <= nb_sommets; j++) {
+		for (int j = 1; j <= end; j++) {
 			int marque_cour = solution.m[j];
 			if (marque_cour < min && T[j] == 0) {
 				min = marque_cour;
