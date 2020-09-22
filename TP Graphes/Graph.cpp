@@ -9,7 +9,7 @@ void initGraphe(graphe_t& graphe) {
 	graphe.s[1][1] = 4;
 	graphe.l[1][1] = 4;
 	graphe.s[1][2] = 2;
-	graphe.s[1][2] = 10;
+	graphe.l[1][2] = 10;
 
 	graphe.ns[2] = 2;
 	graphe.s[2][1] = 3;
@@ -54,18 +54,19 @@ void initGraphe(graphe_t& graphe) {
 void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution) {
 	int nb_sommets = graphe.n;
 	int T[NBMAX_SOMMETS] = { 0 };
+	solution.n = nb_sommets;
 
-	for (int i = 1; i <= n; i++) {
+	for (int i = 1; i <= nb_sommets; i++) {
 		solution.m[i] = INF;
 		solution.pere[i] = -1;
 	}
-	solution.m[start] = 0;Z
+	solution.m[start] = 0;
 
 
-	for (int i = 1; i <= n; i++) {
+	for (int i = 1; i <= nb_sommets; i++) {
 		int min = INF, imin = -1;
 		// Recherche sommet avec marque min et non traité
-		for (int j = 1; j <= n; j++) {
+		for (int j = 1; j <= nb_sommets; j++) {
 			int marque_cour = solution.m[j];
 			if (marque_cour < min && T[j] == 0) {
 				min = marque_cour;
@@ -77,7 +78,7 @@ void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution)
 		// Actualisation de la solution
 		for (int j = 1; j <= nb_succ; j++) {
 			int k = graphe.s[imin][j];
-			int cout_succ = graphe.l[imin][k];
+			int cout_succ = graphe.l[imin][j];
 			int marque_succ = solution.m[k];
 			if (marque_min + cout_succ < marque_succ) {
 				solution.m[k] = marque_min + cout_succ;
@@ -89,6 +90,20 @@ void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution)
 	}
 }
 
-void afficher_solution(solution_t& solution) {
+void Bellman(graphe_t & graphe, int start, int end, solution_t & solution)
+{
+	
+}
 
+void afficher_solution(solution_t& solution, int dest) {
+	int nb_sommets = solution.n;
+
+	if (dest <= nb_sommets && dest > 0)
+	{
+		while (dest != -1)
+		{
+			std::cout << dest << " : " << solution.m[dest] << std::endl;
+			dest = solution.pere[dest];
+		}
+	}
 }

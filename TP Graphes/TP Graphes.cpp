@@ -11,6 +11,6 @@ int main()
 
 	initGraphe(mon_graphe);
 	calculer_chemin(mon_graphe, 1, 9, ma_solution);
-	afficher_solution(ma_solution);
+	afficher_solution(ma_solution, 9);
 }
 
