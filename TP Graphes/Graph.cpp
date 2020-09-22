@@ -56,6 +56,7 @@ void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution)
 	int T[NBMAX_SOMMETS] = { 0 };
 	solution.n = nb_sommets;
 
+	// Initialisation
 	for (int i = 1; i <= nb_sommets; i++) {
 		solution.m[i] = INF;
 		solution.pere[i] = -1;
@@ -90,9 +91,39 @@ void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution)
 	}
 }
 
-void Bellman(graphe_t & graphe, int start, int end, solution_t & solution)
+void Bellman(graphe_t& graphe, int ordre[NBMAX_SOMMETS], solution_t & solution)
 {
-	
+	int nb_sommets = graphe.n;
+	int T[NBMAX_SOMMETS] = { 0 };
+	int stop = 1;
+	solution.n = nb_sommets;
+
+	// Initialisation
+	for (int i = 1; i <= nb_sommets; i++) {
+		solution.m[i] = INF;
+		solution.pere[i] = -1;
+	}
+	solution.m[ordre[1]] = 0;
+
+	while (stop) {
+		stop = 0;
+		for (int i = 1; i <= nb_sommets; i++) {
+			int k = ordre[i];
+			int nb_succ = graphe.ns[k];
+			int marque_min = solution.m[k];
+			// Actualisation de la solution
+			for (int j = 1; j <= nb_succ; j++) {
+				int succ = graphe.s[k][j];
+				int cout_succ = graphe.l[k][j];
+				int marque_succ = solution.m[succ];
+				if (marque_min + cout_succ < marque_succ) {
+					solution.m[succ] = marque_min + cout_succ;
+					solution.pere[succ] = k;
+					stop = 1;
+				}
+			}
+		}
+	}
 }
 
 void afficher_solution(solution_t& solution, int dest) {

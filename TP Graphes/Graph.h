@@ -23,7 +23,7 @@ typedef struct solution_t {
 
 void initGraphe(graphe_t& graphe);
 void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution);
-void Bellman(graphe_t& graphe, int start, int end, solution_t& solution);
+void Bellman(graphe_t& graphe, int ordre[NBMAX_SOMMETS], solution_t& solution);
 void afficher_solution(solution_t& solution, int dest);
 
 
