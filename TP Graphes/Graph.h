@@ -15,6 +15,7 @@ typedef struct graphe_t {
 
 
 typedef struct solution_t {
+	int n;
 	int m[NBMAX_SOMMETS + 1];
 	int pere[NBMAX_SOMMETS + 1];
 }solution_t;
@@ -22,7 +23,8 @@ typedef struct solution_t {
 
 void initGraphe(graphe_t& graphe);
 void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution);
-void afficher_solution(solution_t& solution);
+void Bellman_Ford(graphe_t & graphe, int start, int end, solution_t & solution);
+void afficher_solution(solution_t& solution, int dest);
 
 
 #endif
