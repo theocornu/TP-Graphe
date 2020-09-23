@@ -53,7 +53,7 @@ void initGraphe(graphe_t& graphe) {
 // Méthode de Djikstra
 void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution) {
 	int nb_sommets = graphe.n;
-	int T[NBMAX_SOMMETS] = { 0 };
+	int T[NBMAX_SOMMETS+1] = { 0 };
 	solution.n = nb_sommets;
 
 	// Initialisation
@@ -67,7 +67,7 @@ void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution)
 	for (int i = 1; i <= nb_sommets; i++) {
 		int min = INF, imin = -1;
 		// Recherche sommet avec marque min et non traité
-		for (int j = 1; j <= end; j++) {
+		for (int j = 1; j <= nb_sommets; j++) {
 			int marque_cour = solution.m[j];
 			if (marque_cour < min && T[j] == 0) {
 				min = marque_cour;
@@ -87,14 +87,14 @@ void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution)
 			}
 		}
 		// Sommet imin traité
-		T[imin] = 1;
+		if (imin > 0) T[imin] = 1;
 	}
 }
 
 void Bellman(graphe_t& graphe, int ordre[NBMAX_SOMMETS], solution_t & solution)
 {
 	int nb_sommets = graphe.n;
-	int T[NBMAX_SOMMETS] = { 0 };
+	int T[NBMAX_SOMMETS+1] = { 0 };
 	int stop = 1;
 	solution.n = nb_sommets;
 
