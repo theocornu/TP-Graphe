@@ -28,7 +28,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Downloads\DLP_210.dat">
+    <None Include="graph.dat">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="DLP_210.dat">
       <Filter>Fichiers de ressources</Filter>
     </None>
   </ItemGroup>
