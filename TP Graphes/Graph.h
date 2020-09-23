@@ -1,7 +1,7 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-const int NBMAX_SOMMETS = 20; // nb max de sommmets du graphe
+const int NBMAX_SOMMETS = 210; // nb max de sommmets du graphe
 const int NBMAX_SUCC = 4; // nb max de successeurs par sommet
 const int INF = 9999;
 
@@ -23,7 +23,7 @@ typedef struct solution_t {
 
 void initGraphe(graphe_t& graphe);
 void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution);
-void Bellman_Ford(graphe_t & graphe, int start, int end, solution_t & solution);
+void Bellman(graphe_t& graphe, int ordre[NBMAX_SOMMETS], solution_t& solution);
 void afficher_solution(solution_t& solution, int dest);
 
 

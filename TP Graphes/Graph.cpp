@@ -53,8 +53,8 @@ void initGraphe(graphe_t& graphe) {
 // Méthode de Djikstra
 void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution) {
 	int nb_sommets = graphe.n;
-	int T[NBMAX_SOMMETS+1] = { 0 };
-	solution.n = graphe.n;
+	int T[NBMAX_SOMMETS] = { 0 };
+	solution.n = nb_sommets;
 
 	// Initialisation
 	for (int i = 1; i <= nb_sommets; i++) {
@@ -67,7 +67,7 @@ void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution)
 	for (int i = 1; i <= nb_sommets; i++) {
 		int min = INF, imin = -1;
 		// Recherche sommet avec marque min et non traité
-		for (int j = 1; j <= nb_sommets; j++) {
+		for (int j = 1; j <= end; j++) {
 			int marque_cour = solution.m[j];
 			if (marque_cour < min && T[j] == 0) {
 				min = marque_cour;
@@ -82,47 +82,57 @@ void calculer_chemin(graphe_t& graphe, int start, int end, solution_t& solution)
 			int cout_succ = graphe.l[imin][j];
 			int marque_succ = solution.m[k];
 			if (marque_min + cout_succ < marque_succ) {
-				solution.m[k] = marque_min + cout_succ; 
+				solution.m[k] = marque_min + cout_succ;
 				solution.pere[k] = imin;
 			}
 		}
 		// Sommet imin traité
-		if (imin > 0) T[imin] = 1;
+		T[imin] = 1;
 	}
 }
 
-void Bellman_Ford(graphe_t & graphe, int start, int end, solution_t & solution)
+void Bellman(graphe_t& graphe, int ordre[NBMAX_SOMMETS], solution_t & solution)
 {
 	int nb_sommets = graphe.n;
-	int T[NBMAX_SOMMETS + 1] = { 0 };
-	solution.n = graphe.n;
+	int T[NBMAX_SOMMETS] = { 0 };
+	int stop = 1;
+	solution.n = nb_sommets;
 
 	// Initialisation
 	for (int i = 1; i <= nb_sommets; i++) {
 		solution.m[i] = INF;
 		solution.pere[i] = -1;
 	}
-	solution.m[start] = 0;
+	solution.m[ordre[1]] = 0;
 
-	for (int k = 1; k <= nb_sommets - 1; k++) {
-		for (int u = 1; u <= nb_sommets; u++) {
-			int nb_succ = graphe.ns[u];
-			for (int t = 1; t <= nb_succ; t++) {
-				int succ = graphe.s[u][t],
-					marque_succ = solution.m[succ],
-					marque_nouv = solution.m[u] + graphe.l[u][succ];
-
-				
+	while (stop) {
+		stop = 0;
+		for (int i = 1; i <= nb_sommets; i++) {
+			int k = ordre[i];
+			int nb_succ = graphe.ns[k];
+			int marque_min = solution.m[k];
+			// Actualisation de la solution
+			for (int j = 1; j <= nb_succ; j++) {
+				int succ = graphe.s[k][j];
+				int cout_succ = graphe.l[k][j];
+				int marque_succ = solution.m[succ];
+				if (marque_min + cout_succ < marque_succ) {
+					solution.m[succ] = marque_min + cout_succ;
+					solution.pere[succ] = k;
+					stop = 1;
+				}
 			}
 		}
 	}
-		
 }
 
 void afficher_solution(solution_t& solution, int dest) {
 	int nb_sommets = solution.n;
-	if (dest <= nb_sommets && dest > 0) {
-		while (dest != -1) {
+
+	if (dest <= nb_sommets && dest > 0)
+	{
+		while (dest != -1)
+		{
 			std::cout << dest << " : " << solution.m[dest] << std::endl;
 			dest = solution.pere[dest];
 		}
