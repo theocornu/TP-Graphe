@@ -23,11 +23,11 @@ int main()
 	ordre2[1] = 1;
 	ordre[210] = 210;
 	ordre2[210] = 210;
-	/*for (int i = 2; i < NBMAX_SOMMETS; i++)
+	for (int i = 2; i < NBMAX_SOMMETS; i++)
 	{
-		ordre[i] = i;
-		ordre2[i] = NBMAX_SOMMETS + 1 - i;
-	}*/
+		ordre[i] = i; // 1, 2, ..., 209, 210
+		ordre2[i] = NBMAX_SOMMETS + 1 - i; // 1, 209, 208, ..., 3, 2, 210
+	}
 	
 
 	if (stream) {
@@ -60,10 +60,10 @@ int main()
 		}
 		/* FIN LECTURE */
 
-		calculer_chemin(mon_graphe, 1, 2, ma_solution);
+		calculer_chemin(mon_graphe, 1, 210, ma_solution);
 		//Bellman(mon_graphe, ordre, ma_solution);
 		//Bellman(mon_graphe, ordre2, ma_solution);
-		afficher_solution(ma_solution, 2);
+		afficher_solution(ma_solution, 210);
 	}
 
 
