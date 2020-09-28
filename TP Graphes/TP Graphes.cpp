@@ -14,6 +14,8 @@ int main()
 	graphe_t mon_graphe;
 	solution_t ma_solution;
 	int ordre[NBMAX_SOMMETS+1] = { 0 }, ordre2[NBMAX_SOMMETS+1] = { 0 };
+	int ordreGris[NBMAX_SOMMETS + 1] = {0,8,26,41,58,60,95,114,155,168,148,199,207},
+		ordreGrisInv[NBMAX_SOMMETS + 1] = {0,207,199,148,168,155,114,95,60,58,41,26,8};
 	std::ifstream stream("graph.dat");
 	int nbArcs, nbSommets;
 	std::string buffer;
@@ -27,8 +29,7 @@ int main()
 	{
 		ordre[i] = i; // 1, 2, ..., 209, 210
 		ordre2[i] = NBMAX_SOMMETS + 1 - i; // 1, 209, 208, ..., 3, 2, 210
-	}
-	
+	}	
 
 	if (stream) {
 		/* LECTURE GRAPHE */
@@ -60,10 +61,21 @@ int main()
 		}
 		/* FIN LECTURE */
 
-		calculer_chemin(mon_graphe, 1, 210, ma_solution);
+
+		for (int i = 1; i < 13; i++)
+		{
+			calculer_chemin(mon_graphe, ordreGris[i], -1, ma_solution);
+			for (int j = 1; j <= 13; j++)
+			{
+				afficher_solution(ma_solution, ordreGris[j]);
+			}
+			cout << endl;
+		}
+
+		//calculer_chemin(mon_graphe, 207, 8, ma_solution);
 		//Bellman(mon_graphe, ordre, ma_solution);
 		//Bellman(mon_graphe, ordre2, ma_solution);
-		afficher_solution(ma_solution, 210);
+		//afficher_solution(ma_solution, 8);
 	}
 
 

@@ -34,5 +34,8 @@
     <None Include="DLP_210.dat">
       <Filter>Fichiers de ressources</Filter>
     </None>
+    <None Include="Distances_gris.xlsx">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -158,6 +158,7 @@
     <ClInclude Include="Graph.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Distances_gris.xlsx" />
     <None Include="DLP_210.dat" />
     <None Include="graph.dat" />
   </ItemGroup>

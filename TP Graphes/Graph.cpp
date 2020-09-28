@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "Graph.h"
 
 
@@ -131,9 +133,12 @@ void afficher_solution(solution_t& solution, int dest) {
 
 	if (dest <= nb_sommets && dest > 0)
 	{
-		while (dest != -1)
+		// Affichage total
+		std::cout << dest << " : " << solution.m[dest] << std::endl;
+		while (dest != -1 && solution.pere[dest] != -1)
 		{
-			std::cout << dest << " : " << solution.m[dest] << std::endl;
+			// Affichage intermédiaire
+			//std::cout << dest << " : " << solution.m[dest] << std::endl;
 			dest = solution.pere[dest];
 		}
 	}
